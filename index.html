@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Guillem Cucurull Llovera — Quant Researcher · Data Scientist · Applied AI Engineer</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<meta name="description" content="Physics-trained quant researcher, data scientist and applied / agentic AI engineer. MSc Financial Data Science (Distinction), CERN/PSI background. I build production AI systems and the data foundations behind them." />
+<meta name="author" content="Guillem Cucurull Llovera" />
+<meta property="og:title" content="Guillem Cucurull Llovera — Quant Researcher · Data Scientist · Applied AI Engineer" />
+<meta property="og:description" content="From particle physics at CERN to quant research and agentic AI in production. MSc Financial Data Science (Distinction)." />
+<meta property="og:type" content="website" />
+
+<style>
+  :root{
+    --bg:#0a0e12; --bg-soft:#0f151b; --panel:#111921; --panel-2:#0d141a;
+    --line:#1d2730; --text:#d7e0e8; --muted:#7e8c99; --dim:#4f5c69;
+    --accent:#4cd4b0; --accent-2:#5aa9ff; --warn:#ffcf6b; --pink:#ff7a9c;
+    --mono:"SF Mono","JetBrains Mono","Fira Code",ui-monospace,"Cascadia Code",Menlo,Consolas,monospace;
+    --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --maxw:1120px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;
+    background-image:radial-gradient(900px 500px at 80% -10%,rgba(76,212,176,.07),transparent 60%),radial-gradient(700px 500px at 0% 8%,rgba(90,169,255,.06),transparent 55%);
+    background-attachment:fixed;}
+  a{color:var(--accent);text-decoration:none;} a:hover{text-decoration:underline;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;}
+  .grid-bg::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+    background-image:linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);
+    background-size:44px 44px;mask-image:radial-gradient(ellipse 100% 60% at 50% 0%,#000 30%,transparent 80%);}
+
+  /* nav */
+  nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(10px);background:rgba(10,14,18,.72);border-bottom:1px solid var(--line);}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:58px;}
+  .brand{font-family:var(--mono);font-size:14px;color:var(--text);letter-spacing:.3px;}
+  .brand .blink{color:var(--accent);animation:blink 1.2s steps(1) infinite;}
+  @keyframes blink{50%{opacity:0;}}
+  .navlinks{display:flex;gap:20px;font-family:var(--mono);font-size:13px;}
+  .navlinks a{color:var(--muted);} .navlinks a:hover{color:var(--accent);text-decoration:none;}
+  @media (max-width:780px){.navlinks{display:none;}}
+
+  /* hero */
+  header{position:relative;z-index:1;padding:74px 0 50px;}
+  .kicker{font-family:var(--mono);font-size:13px;color:var(--accent);letter-spacing:1px;margin-bottom:16px;}
+  h1{font-size:clamp(34px,6vw,60px);line-height:1.04;margin:0 0 16px;letter-spacing:-1.2px;font-weight:700;}
+  .arc{font-family:var(--mono);font-size:clamp(13px,2.3vw,18px);margin:0 0 22px;}
+  .arc .step{color:var(--accent);} .arc .sep{color:var(--dim);padding:0 7px;}
+  .lede{font-size:clamp(16px,2vw,18.5px);color:var(--muted);max-width:760px;margin:0 0 26px;}
+  .lede strong{color:var(--text);font-weight:600;}
+  .cta{display:flex;flex-wrap:wrap;gap:12px;align-items:center;}
+  .btn{font-family:var(--mono);font-size:13px;padding:11px 17px;border-radius:8px;border:1px solid var(--line);color:var(--text);background:var(--panel);transition:.18s;display:inline-flex;align-items:center;gap:8px;cursor:pointer;}
+  .btn:hover{text-decoration:none;border-color:var(--accent);color:var(--accent);transform:translateY(-1px);}
+  .btn.primary{background:var(--accent);color:#04130f;border-color:var(--accent);font-weight:600;}
+  .btn.primary:hover{color:#04130f;filter:brightness(1.08);}
+  .meta-row{margin-top:24px;display:flex;flex-wrap:wrap;gap:18px;font-family:var(--mono);font-size:12.5px;color:var(--dim);}
+  .meta-row span b{color:var(--muted);font-weight:500;}
+  .open-to{margin-top:14px;font-family:var(--mono);font-size:12.5px;color:var(--muted);}
+  .open-to .loc{color:var(--accent);}
+
+  /* hero two-column: descriptive text left, experience panel right */
+  .hero-grid{display:grid;grid-template-columns:1fr 312px;gap:44px;align-items:start;margin-top:6px;}
+  @media (max-width:920px){.hero-grid{grid-template-columns:1fr;gap:34px;}}
+  .hcard{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px 20px 18px;}
+  @media (min-width:921px){.hcard{position:sticky;top:74px;}}
+  .hcard .hc-h{font-family:var(--mono);font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:var(--accent);margin-bottom:15px;display:flex;align-items:center;gap:8px;}
+  .hcard .hc-h .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--accent);}
+  .hc-item{padding-bottom:13px;margin-bottom:13px;border-bottom:1px solid var(--line);}
+  .hc-item:last-of-type{border-bottom:none;margin-bottom:6px;padding-bottom:0;}
+  .hc-item .r{font-size:14px;font-weight:600;color:var(--text);line-height:1.3;}
+  .hc-item .o{font-family:var(--mono);font-size:11.5px;color:var(--accent-2);margin:3px 0 1px;}
+  .hc-item .w{font-family:var(--mono);font-size:10.5px;color:var(--dim);}
+  .hc-more{font-family:var(--mono);font-size:11.5px;color:var(--accent);display:inline-block;margin-top:8px;}
+
+  /* collapsible "read more" on case blocks */
+  .expand-btn{font-family:var(--mono);font-size:12.5px;color:var(--accent);background:rgba(76,212,176,.04);border:1px solid var(--line);border-radius:8px;padding:9px 15px;cursor:pointer;transition:.16s;display:inline-flex;align-items:center;gap:9px;margin-top:2px;}
+  .expand-btn:hover{border-color:var(--accent);background:rgba(76,212,176,.09);}
+  .expand-btn .ar{font-size:15px;line-height:1;transition:transform .32s cubic-bezier(.4,0,.2,1);}
+  .expand-btn[aria-expanded="true"] .ar{transform:rotate(135deg);}
+  .expand-btn .lbl-more{display:inline;} .expand-btn .lbl-less{display:none;}
+  .expand-btn[aria-expanded="true"] .lbl-more{display:none;} .expand-btn[aria-expanded="true"] .lbl-less{display:inline;}
+  .case-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .44s cubic-bezier(.4,0,.2,1);}
+  .case-body.open{grid-template-rows:1fr;}
+  .case-body > .cb-inner{overflow:hidden;min-height:0;}
+  .case-body .cb-pad{padding-top:22px;}
+
+  /* logo marquee — seamless infinite loop */
+  .logos{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:rgba(255,255,255,.015);overflow:hidden;position:relative;z-index:1;padding:22px 0;}
+  .logos::before,.logos::after{content:"";position:absolute;top:0;bottom:0;width:100px;z-index:2;pointer-events:none;}
+  .logos::before{left:0;background:linear-gradient(90deg,var(--bg),transparent);}
+  .logos::after{right:0;background:linear-gradient(270deg,var(--bg),transparent);}
+  .logos .marquee{display:flex;width:max-content;animation:logoscroll 34s linear infinite;}
+  .logos .track{display:flex;align-items:center;gap:58px;padding-right:58px;flex-shrink:0;}
+  .logos:hover .marquee{animation-play-state:paused;}
+  .logos img{height:34px;width:auto;object-fit:contain;opacity:.58;transition:opacity .2s;}
+  .logos img:hover{opacity:.95;}
+  .logos .lg{height:46px;}
+  .logos .psi{height:48px;}
+  @keyframes logoscroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+  /* sections */
+  section{position:relative;z-index:1;padding:54px 0;border-top:1px solid var(--line);}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:30px;flex-wrap:wrap;}
+  .sec-num{font-family:var(--mono);font-size:13px;color:var(--accent);}
+  .sec-title{font-size:clamp(22px,3vw,30px);margin:0;letter-spacing:-.5px;font-weight:700;}
+  .sec-intro{color:var(--muted);max-width:780px;margin:-12px 0 28px;}
+
+  /* case studies */
+  .case{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:26px;margin-bottom:22px;overflow:hidden;}
+  .case-top{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 14px;margin-bottom:4px;}
+  .case h3{font-size:20px;margin:0;letter-spacing:-.3px;}
+  .case .role{font-family:var(--mono);font-size:12.5px;color:var(--accent-2);}
+  .badges{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap;}
+  .bdg{font-family:var(--mono);font-size:10.5px;padding:3px 8px;border-radius:5px;border:1px solid var(--line);color:var(--muted);}
+  .bdg.live{color:var(--accent);border-color:var(--accent);}
+  .bdg.research{color:var(--accent-2);border-color:var(--accent-2);}
+  .bdg.design{color:var(--warn);border-color:var(--warn);}
+  .tagline{color:var(--muted);margin:6px 0 18px;font-size:15px;}
+  .case-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+  @media (max-width:840px){.case-grid{grid-template-columns:1fr;}}
+  .paps{display:grid;gap:13px;align-content:start;}
+  .pap .h{font-family:var(--mono);font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--accent);margin-bottom:2px;}
+  .pap.problem .h{color:var(--accent-2);}
+  .pap p{margin:0;font-size:14.5px;color:var(--text);}
+  .stack-tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px;}
+  .tag{font-family:var(--mono);font-size:11.5px;color:var(--muted);border:1px solid var(--line);background:var(--panel-2);padding:4px 9px;border-radius:6px;}
+
+  /* proof callout */
+  .proof{background:linear-gradient(180deg,rgba(76,212,176,.07),rgba(76,212,176,0));border:1px solid var(--accent);border-radius:12px;padding:18px 20px;margin-bottom:24px;display:flex;gap:14px;align-items:flex-start;}
+  .proof .ic{font-size:18px;}
+  .proof p{margin:0;font-size:14px;color:var(--text);}
+  .proof a{font-family:var(--mono);font-size:13px;}
+
+  /* skills matrix */
+  .matrix{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+  @media (max-width:720px){.matrix{grid-template-columns:1fr;}}
+  .mcard{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px;}
+  .mcard h4{margin:0 0 14px;font-family:var(--mono);font-size:13px;color:var(--accent);letter-spacing:.5px;display:flex;align-items:center;gap:8px;}
+  .mcard h4 .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);display:inline-block;}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;}
+  .chip{font-family:var(--mono);font-size:12px;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:6px;padding:5px 10px;transition:.15s;}
+  .chip:hover{border-color:var(--accent);color:var(--accent);}
+
+  /* timeline */
+  .timeline{position:relative;margin-left:6px;}
+  .timeline::before{content:"";position:absolute;left:6px;top:4px;bottom:4px;width:2px;background:linear-gradient(var(--accent),transparent);opacity:.5;}
+  .tl-item{position:relative;padding:0 0 26px 30px;}
+  .tl-item::before{content:"";position:absolute;left:0;top:6px;width:14px;height:14px;border-radius:50%;background:var(--bg);border:2px solid var(--accent);}
+  .tl-item .when{font-family:var(--mono);font-size:12px;color:var(--dim);}
+  .tl-item h4{margin:2px 0 2px;font-size:16.5px;}
+  .tl-item .org{color:var(--accent-2);font-size:14px;}
+  .tl-item p{margin:8px 0 0;color:var(--muted);font-size:14px;}
+
+  /* education */
+  .edu{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  @media (max-width:760px){.edu{grid-template-columns:1fr;}}
+  .edu-card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px;}
+  .edu-card .deg{font-weight:600;margin-bottom:4px;}
+  .edu-card .sch{color:var(--accent);font-family:var(--mono);font-size:13px;}
+  .edu-card .yr{color:var(--dim);font-family:var(--mono);font-size:12px;margin-top:8px;}
+  .edu-card .badge{display:inline-block;margin-top:10px;font-size:11.5px;font-family:var(--mono);color:var(--accent);border:1px solid var(--accent);border-radius:5px;padding:2px 7px;}
+
+  /* contact */
+  .contact-box{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:34px;text-align:center;}
+  .contact-box h3{font-size:24px;margin:0 0 10px;}
+  .contact-box p{color:var(--muted);margin:0 0 22px;}
+  .langs{display:flex;flex-wrap:wrap;gap:18px;justify-content:center;font-family:var(--mono);font-size:12.5px;color:var(--dim);margin-top:24px;}
+  .langs b{color:var(--muted);font-weight:500;}
+  footer{padding:30px 0 50px;text-align:center;color:var(--dim);font-family:var(--mono);font-size:12px;border-top:1px solid var(--line);}
+
+  /* research & writings */
+  .papers{display:grid;gap:14px;}
+  .paper{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;display:flex;justify-content:space-between;gap:18px;align-items:center;flex-wrap:wrap;transition:.16s;}
+  .paper:hover{border-color:var(--accent);}
+  .paper .info{flex:1;min-width:280px;}
+  .paper h4{margin:0 0 5px;font-size:15.5px;letter-spacing:-.2px;}
+  .paper .pmeta{font-family:var(--mono);font-size:11px;color:var(--accent);margin-bottom:7px;letter-spacing:.3px;}
+  .paper p{margin:0;font-size:13.5px;color:var(--muted);}
+  .paper .dl{font-family:var(--mono);font-size:12.5px;border:1px solid var(--accent);color:var(--accent);border-radius:8px;padding:10px 16px;white-space:nowrap;}
+  .paper .dl:hover{background:var(--accent);color:#04130f;text-decoration:none;}
+
+  .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease;}
+  .reveal.in{opacity:1;transform:none;}
+</style>
+</head>
+<body class="grid-bg">
+
+<nav>
+  <div class="wrap">
+    <div class="brand">Guillem Cucurull Llovera<span class="blink">_</span></div>
+    <div class="navlinks">
+      <a href="#work">work</a><a href="#research">research</a>
+      <a href="#stack">stack</a><a href="#experience">experience</a><a href="#contact">contact</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header>
+  <div class="wrap">
+    <div class="kicker reveal">Quant research · Data science · Applied &amp; agentic AI</div>
+    <h1 class="reveal">Guillem Cucurull&nbsp;Llovera</h1>
+    <div class="arc reveal"><span class="step">particle physics @ CERN</span><span class="sep">→</span><span class="step">MSc Financial Data Science (Distinction)</span><span class="sep">→</span><span class="step">quant research &amp; agentic AI</span></div>
+    <div class="hero-grid">
+      <div class="hero-main">
+        <p class="lede reveal">
+          <strong>Quant researcher, data scientist and applied / agentic AI engineer</strong>, physics-trained from
+          detector work at CERN. I extract signal from noisy data and turn it into intelligent, self-running systems —
+          with <strong>machine learning, statistical modelling, quantum &amp; quantitative research and multi-agent AI</strong> —
+          and I own the full stack and data foundations behind them. I'm currently <strong>Head of Development (remote)
+          at a Swiss investment firm</strong>, and I'm now looking to bring that end-to-end experience to an
+          <strong>in-person team in the USA, Switzerland or the UK</strong>.
+        </p>
+        <div class="cta reveal">
+          <a class="btn primary" href="mailto:guillemllovera99@gmail.com">✉ Get in touch</a>
+          <a class="btn" href="https://www.linkedin.com/in/guillem-cucurull-llovera-6a52411b8/" target="_blank" rel="noopener">in / LinkedIn ↗</a>
+          <a class="btn" href="assets/writings/CV_Guillem_Cucurull_Llovera.pdf" target="_blank" rel="noopener">CV (PDF) ↓</a>
+          <a class="btn" href="#research">Research ↓</a>
+        </div>
+        <div class="open-to reveal">Based in <span class="loc">London, UK</span> · seeking in-person roles in the <span class="loc">USA · Switzerland · UK</span> (open to relocate)</div>
+        <div class="meta-row reveal">
+          <span><b>work rights</b> EU Citizen (Spanish) · UK Right to Work (PSW visa)</span>
+          <span><b>target roles</b> Data Scientist · ML / AI Engineer · Quant Researcher · Applied / Agentic AI</span>
+        </div>
+      </div>
+      <aside class="hero-side reveal">
+        <div class="hcard">
+          <div class="hc-h"><span class="dot"></span>Experience</div>
+          <div class="hc-item">
+            <div class="r">Head of Development</div>
+            <div class="o">Asymmetrica Investments AG</div>
+            <div class="w">May 2026 — Present · Remote</div>
+          </div>
+          <div class="hc-item">
+            <div class="r">Research Analyst</div>
+            <div class="o">Asymmetrica Investments AG</div>
+            <div class="w">Feb — May 2026 · Remote</div>
+          </div>
+          <div class="hc-item">
+            <div class="r">Data Analyst</div>
+            <div class="o">Victoria Solutions</div>
+            <div class="w">2025 · London, UK</div>
+          </div>
+          <div class="hc-item">
+            <div class="r">Detector Calibration — Research Assistant</div>
+            <div class="o">Paul Scherrer Institute · CERN CMS</div>
+            <div class="w">2023 · Villigen, CH</div>
+          </div>
+          <div class="hc-item">
+            <div class="r">Graduate Research &amp; Teaching</div>
+            <div class="o">University of Zürich</div>
+            <div class="w">2022 — 2024 · Zürich, CH</div>
+          </div>
+          <a href="#experience" class="hc-more">Full timeline ↓</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</header>
+
+<!-- LOGO MARQUEE -->
+<div class="logos" aria-label="Affiliations">
+  <div class="marquee" id="marquee">
+    <div class="track">
+      <img src="assets/logos/w_01_boston.png" alt="Boston University"/>
+      <img src="assets/logos/w_02_uzh.png" alt="University of Zürich"/>
+      <img class="psi" src="assets/logos/w_03_psi.png" alt="Paul Scherrer Institute"/>
+      <img class="lg" src="assets/logos/w_04_cern.png" alt="CERN"/>
+      <img src="assets/logos/w_06_asymmetrica.png" alt="Asymmetrica Investments"/>
+      <img src="assets/logos/w_07_avo.png" alt="AVO Oro Verde"/>
+    </div>
+  </div>
+</div>
+
+<!-- SELECTED WORK -->
+<section id="work">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="sec-num">01</span><h2 class="sec-title">Selected work</h2></div>
+    <p class="sec-intro reveal">Each project is described by what was <em>built and owned</em> — the architecture, the algorithms and the engineering decisions. Badges mark what's <span style="color:var(--accent)">shipped &amp; live</span>, in <span style="color:var(--accent-2)">research</span>, or at <span style="color:var(--warn)">design stage</span>. Expand any card for the full detail.</p>
+
+    <!-- A: platform overview -->
+    <article class="case reveal">
+      <div class="case-top">
+        <h3>NEXUS — sovereign AI platform &amp; agent control plane</h3>
+        <span class="role">Head of Development</span>
+        <span class="badges"><span class="bdg live">live</span></span>
+      </div>
+      <p class="tagline">The firm's entire technology estate, run as one sovereign (fully self-hosted) AI platform — agentic AI, data engineering, applications and secure infrastructure — governed through <strong>NEXUS</strong>, a control plane I designed with a human-in-the-loop gate on every consequential action.</p>
+      <button class="expand-btn" aria-expanded="false"><span class="ar">+</span><span class="lbl-more">Read more</span><span class="lbl-less">Show less</span></button>
+      <div class="case-body"><div class="cb-inner"><div class="cb-pad">
+      <div class="case-grid">
+        <div class="paps">
+          <div class="pap problem"><div class="h">Mandate</div><p>A lean investment firm needed to turn manual research, fundraising and trading workflows into intelligent, self-running systems — without leaking data to third-party SaaS or between clients.</p></div>
+          <div class="pap"><div class="h">What I own</div><p>Cloud infrastructure, data pipelines, application development, email deliverability and zero-downtime production releases — plus technical &amp; product strategy. I mentor and review junior engineers and interns.</p></div>
+        </div>
+        <div class="paps">
+          <div class="pap"><div class="h">Infrastructure</div><p>A multi-server, privacy-first environment on a private mesh network behind a reverse proxy: containerised services, automated TLS, nightly backups, firewalling / isolation and a reproducible deploy workflow.</p></div>
+          <div class="pap"><div class="h">NEXUS control plane</div><p>The whole estate runs through <strong>NEXUS</strong>, an operational control plane I designed — a single authenticated surface (the "air-traffic control" for the agent fleet) with a risk-tiered <strong>approval inbox</strong>, a live agent graph, per-agent cognitive-trace terminals and an event-sourced audit trail. Sovereign self-hosted AI, with a human-in-the-loop gate on every consequential action.</p></div>
+        </div>
+      </div>
+      <div class="stack-tags">
+        <span class="tag">Linux</span><span class="tag">Docker</span><span class="tag">Caddy</span><span class="tag">Tailscale mesh</span><span class="tag">systemd</span><span class="tag">PostgreSQL</span><span class="tag">Redis pub/sub</span><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">Node.js</span><span class="tag">React / TypeScript</span><span class="tag">zero-downtime deploys</span>
+      </div>
+      </div></div></div>
+    </article>
+
+    <!-- B: outreach + SDR + CRM -->
+    <article class="case reveal">
+      <div class="case-top">
+        <h3>Capital-raising platform — investor CRM + multi-agent SDR engine</h3>
+        <span class="role">design + build + ship</span>
+        <span class="badges"><span class="bdg live">live</span></span>
+      </div>
+      <p class="tagline">Not an automation tool — a full capital-raising system: an investor CRM and deal pipeline with a multi-agent outreach engine on top, built for the firm and architected to be sold as a B2B SaaS to other funds.</p>
+      <button class="expand-btn" aria-expanded="false"><span class="ar">+</span><span class="lbl-more">Read more</span><span class="lbl-less">Show less</span></button>
+      <div class="case-body"><div class="cb-inner"><div class="cb-pad">
+      <div class="case-grid">
+        <div class="paps">
+          <div class="pap problem"><div class="h">Problem</div><p>Raising a fund means working a large universe of institutional investors with genuinely personalized, compliant outreach — and tracking every touch through a deal. Impossible by hand; naive LLM emails hallucinate and wreck deliverability.</p></div>
+          <div class="pap"><div class="h">CRM — system of record</div><p>A multi-tenant investor CRM (Node.js / Express / SQLite) over an <strong>~80,000-firm institutional-investor universe (sourced from BlackRock)</strong>: firms, contacts and a Kanban deal pipeline, with per-client workspace isolation and per-field redaction of internal scoring. Outreach is wired into deals, so every email maps to a pipeline stage.</p></div>
+          <div class="pap"><div class="h">Targeting &amp; scoring</div><p>A deterministic fit-scoring model ranks prospects per deal (sector, geography, ticket size, mandate fit), with entity de-duplication and resolution across the dataset so the engine works the right investors first.</p></div>
+        </div>
+        <div class="paps">
+          <div class="pap"><div class="h">Multi-agent SDR engine</div><p>An AI engine drafts each email; a separate <strong>auditor model I built</strong> validates it against strict rules and flags violations before a human approves the send. Tasks route across multiple LLMs by cost / quality, backed by a persona library and a semantic-memory layer.</p></div>
+          <div class="pap"><div class="h">Deliverability &amp; productization</div><p>A paced send queue with warm-up ramp + daily caps, suppression / unsubscribe handling, open / click tracking and SPF / DKIM / DMARC alignment for compliant sending at volume — all built as a workspace-per-client multi-tenant architecture ready to sell as B2B SaaS.</p></div>
+        </div>
+      </div>
+      <div class="stack-tags">
+        <span class="tag">Node.js</span><span class="tag">Express</span><span class="tag">SQLite</span><span class="tag">Python</span><span class="tag">deterministic fit-scoring</span><span class="tag">entity resolution</span><span class="tag">multi-model LLM orchestration</span><span class="tag">MCP server</span><span class="tag">SPF/DKIM/DMARC</span><span class="tag">multi-tenant B2B SaaS</span>
+      </div>
+      </div></div></div>
+    </article>
+
+    <!-- C: AI hedge fund -->
+    <article class="case reveal">
+      <div class="case-top">
+        <h3>Autonomous AI hedge-fund engine</h3>
+        <span class="role">architect — the firm's systematic hedge fund</span>
+        <span class="badges"><span class="bdg live">running live</span></span>
+      </div>
+      <p class="tagline">The systematic engine behind the firm's hedge fund: ~22 containerised services where specialist agents extract market signals, an ensemble fusion layer forms a directional view, an LLM generates and walk-forward-backtests strategies, and risk-gated orders execute across FX and equities — continuously, with a human approval gate.</p>
+      <button class="expand-btn" aria-expanded="false"><span class="ar">+</span><span class="lbl-more">Read more</span><span class="lbl-less">Show less</span></button>
+      <div class="case-body"><div class="cb-inner"><div class="cb-pad">
+      <div class="case-grid">
+        <div class="paps">
+          <div class="pap problem"><div class="h">Problem</div><p>Discretionary research doesn't scale and is hard to audit. The mandate: a fully systematic, event-driven pipeline running 24/7 — from raw signals to risk-checked, backtested strategies and execution — that a small team can operate and trust.</p></div>
+          <div class="pap"><div class="h">Signals &amp; architecture</div><p>~22 Docker services over a <strong>Redis pub/sub backbone</strong>, persisting to PostgreSQL. Four specialist signal agents publish per asset: <strong>technical</strong> (RSI, MACD, EMA, Bollinger, ATR, VIX-regime), <strong>macro</strong> (central-bank rate differentials / carry + economic-calendar blackout gating), <strong>news / sentiment</strong>, and <strong>fundamental positioning</strong> (CFTC Commitment-of-Traders). Heartbeat health monitoring; FastAPI + React dashboard; Discord / Telegram control.</p></div>
+          <div class="pap"><div class="h">Signal fusion &amp; strategy</div><p>A fusion layer combines the signal families as a <strong>weighted ensemble</strong> (≈ technical 40% / macro 25% / fundamental 20% / news 15%) with an LLM arbitration step over conflicts, then a strategy agent backtests a library — momentum, mean-reversion, trend-following, breakout, stat-arb — on <strong>QuantConnect LEAN</strong> with <strong>walk-forward validation</strong>.</p></div>
+        </div>
+        <div class="paps">
+          <div class="pap"><div class="h">Portfolio &amp; risk</div><p>Strategies are ranked by <strong>Sharpe</strong> and combined with <strong>risk-parity</strong> weighting; hard constraints gate execution — <strong>max drawdown 10%, leverage ≤ 3×, correlation ≤ 0.8, VaR / ES at 95%</strong> — with ATR-based position sizing and a portfolio circuit-breaker.</p></div>
+          <div class="pap"><div class="h">Regime-aware meta-agent</div><p>A four-part meta-agent scales gross exposure by a Monte-Carlo <strong>CVaR</strong> target: a 3-state regime <strong>HMM</strong> (100% NBER crisis precision), a One-Class-SVM anomaly alarm, a Bayesian strategy-weighting ensemble, and a bootstrap CVaR sizer. Out-of-sample it lifts Sharpe to <strong>0.895</strong> (above in-sample) and cuts drawdown ~41% — documented in a 949-line <strong>SR 11-7</strong> model-risk paper (see writings).</p></div>
+          <div class="pap"><div class="h">Execution &amp; scope</div><p>A position manager runs stop / take-profit / time exits every minute across <strong>OANDA</strong> (FX) and <strong>Alpaca</strong> (equities), human-approved before each order. Extending to crypto and <strong>options</strong> (SVI/SABR vol surface, py_vollib Greeks, delta/theta-limited structures); a quantum-ML research track plugs in as a weight-capped signal source.</p></div>
+        </div>
+      </div>
+      <div class="stack-tags">
+        <span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">React</span><span class="tag">Redis pub/sub</span><span class="tag">PostgreSQL</span><span class="tag">Docker (~22 services)</span><span class="tag">QuantConnect / LEAN</span><span class="tag">walk-forward validation</span><span class="tag">risk-parity</span><span class="tag">Sharpe / drawdown / VaR</span><span class="tag">ATR sizing</span><span class="tag">CFTC COT</span><span class="tag">OANDA · Alpaca</span>
+      </div>
+      <div style="margin-top:14px;"><a class="dl" href="assets/writings/AI_Hedge_Fund_Methodology.pdf" target="_blank" rel="noopener">Read the full methodology write-up (PDF) ↓</a></div>
+      </div></div></div>
+    </article>
+
+    <!-- E: investor apps -->
+    <article class="case reveal">
+      <div class="case-top">
+        <h3>Investor apps — AVO Oro Verde &amp; Abrod</h3>
+        <span class="role">full-stack mobile</span>
+        <span class="badges"><span class="bdg live">shipped</span></span>
+      </div>
+      <p class="tagline">Two production, separately-branded investor apps delivered end-to-end for two different ventures — onboarding, KYC/AML, e-signature and portfolio, all cross-platform from one engineering effort.</p>
+      <button class="expand-btn" aria-expanded="false"><span class="ar">+</span><span class="lbl-more">Read more</span><span class="lbl-less">Show less</span></button>
+      <div class="case-body"><div class="cb-inner"><div class="cb-pad">
+      <div class="paps">
+        <div class="pap"><div class="h">AVO Oro Verde — venture &amp; investor app</div><p>I'm carrying <strong>Avo Oro Verde</strong>, a private-placement agricultural-finance venture (senior secured loans backed by farmland), and built its investor app end-to-end: a cross-platform React Native / Expo app on a Supabase backend with a <strong>5-step KYC flow</strong> (identity → source of funds → document → in-app e-signature → review), <strong>multi-method auth</strong> (email, phone, passkey / biometric, Google, Apple), multi-language (EN / ES / FR / DE), portfolio, statements and an admin panel — with row-level security and audit logs throughout.</p></div>
+        <div class="pap"><div class="h">Abrod — second investor app, different mandate</div><p>I delivered a second, separately-branded investor app for <strong>Abrod</strong>, a diaspora-investment platform — adapting the onboarding, KYC and portfolio experience to a distinct brand, audience and mandate. Two production investor apps for two ventures: versatility across brands and compliance needs, shipped via EAS builds.</p></div>
+      </div>
+      <div class="stack-tags"><span class="tag">React Native</span><span class="tag">Expo</span><span class="tag">Supabase</span><span class="tag">Postgres + RLS</span><span class="tag">i18next</span><span class="tag">passkey / biometric auth</span><span class="tag">in-app e-signature</span><span class="tag">EAS</span></div>
+      </div></div></div>
+    </article>
+
+    <!-- F: smaller grid -->
+    <article class="case reveal">
+      <div class="case-top">
+        <h3>More systems</h3>
+        <span class="role">selected</span>
+      </div>
+      <p class="tagline">A valuations engine and a PE-returns layer that consumes it, a macro-intelligence workflow, and a cross-border e-commerce architecture — the smaller systems around the core platform.</p>
+      <button class="expand-btn" aria-expanded="false"><span class="ar">+</span><span class="lbl-more">Read more</span><span class="lbl-less">Show less</span></button>
+      <div class="case-body"><div class="cb-inner"><div class="cb-pad">
+      <div class="case-grid">
+        <div class="paps">
+          <div class="pap"><div class="h">Valuations dashboard</div><p>Next.js + FastAPI tool that extracts structured financials — revenue, gross margin, EBITDA, net income, NOPAT, unit economics (CAC / LTV / payback), burn &amp; runway — from pitch decks and Excel models via <strong>structured (Pydantic-typed) LLM extraction</strong>, then computes EV / EBITDA comparables and DCF-implied value, with Excel export. <span style="color:var(--accent)">Shipped.</span></p></div>
+          <div class="pap"><div class="h">PE returns dashboard</div><p>A private-equity modelling layer that <strong>consumes the valuations output as inputs</strong> and runs the deal math: DCF / NPV over a projected free-cash-flow path with terminal value, EV / EBITDA exit-multiple valuation, annualized <strong>IRR</strong> and profitability index, plus 2-D sensitivity tables (exit-multiple × holding period, WACC × multiple) and bear / base / bull scenarios. <span style="color:var(--accent)">Shipped.</span></p></div>
+        </div>
+        <div class="paps">
+          <div class="pap"><div class="h">Macro-intelligence dashboard</div><p>An n8n + multi-agent workflow turning macro data and news into regime detection, signal summaries and strategy scenarios, with QuantConnect walk-forward backtests behind it. <span style="color:var(--accent)">Shipped.</span></p></div>
+          <div class="pap"><div class="h">Cross-border e-commerce platform</div><p>An 11-microservice architecture (gateway, catalog, payments, token ledger, compliance gating, logistics) with full audit trails. <span style="color:var(--warn)">Design / architecture stage.</span></p></div>
+        </div>
+      </div>
+      </div></div></div>
+    </article>
+  </div>
+</section>
+
+<!-- RESEARCH -->
+<section id="research">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="sec-num">02</span><h2 class="sec-title">Research &amp; engineering</h2></div>
+    <p class="sec-intro reveal">A production quantum machine-learning layer across FX, options, futures and crypto; operator-theoretic forecasting (Koopman / conformal); and the CERN/PSI detector-calibration physics it all builds on.</p>
+
+    <!-- current quantum / quant research -->
+    <article class="case reveal">
+      <div class="case-top">
+        <h3>Quantum &amp; quantitative research — live, vs classical</h3>
+        <span class="role">research &amp; engineering</span>
+        <span class="badges"><span class="bdg research">running live</span></span>
+      </div>
+      <p class="tagline">A production quantum machine-learning layer inside the live trading engine — across <strong>FX, options, futures and crypto</strong> — where four quantum models run as an ensemble with, and benchmarked against, tuned classical baselines, on simulators and on real IBM&nbsp;Quantum hardware.</p>
+      <button class="expand-btn" aria-expanded="false"><span class="ar">+</span><span class="lbl-more">Read more</span><span class="lbl-less">Show less</span></button>
+      <div class="case-body"><div class="cb-inner"><div class="cb-pad">
+      <div class="case-grid">
+        <div class="paps">
+          <div class="pap"><div class="h">VQC — directional classifier</div><p>A 14-qubit <strong>variational quantum classifier</strong> (data re-uploading, domain-aware entanglement, parameter-shift gradients) producing calibrated up/down probabilities per asset from a 14-feature vector.</p></div>
+          <div class="pap"><div class="h">QAOA — portfolio optimizer</div><p>Cardinality-constrained allocation as a QUBO solved with QAOA, using a constraint-preserving <strong>XY-mixer + Dicke-state</strong> initialization that stays inside the feasible K-hot manifold.</p></div>
+          <div class="pap"><div class="h">Quantum-kernel anomaly (qrbf-OCSVM)</div><p>A one-class SVM whose RBF kernel is replaced by a <strong>fidelity quantum kernel</strong> — market-state similarity computed in a Hilbert space no classical kernel reaches — for distribution-free regime / crisis alarms.</p></div>
+          <div class="pap"><div class="h">Quantum Reservoir Computing</div><p>A <strong>transverse-field Ising</strong> reservoir as a fixed quantum feature extractor with a light classical readout — quantum temporal richness with no barren-plateau risk.</p></div>
+        </div>
+        <div class="paps">
+          <div class="pap"><div class="h">Ensemble &amp; validation</div><p>The quantum models combine with classical signals in a <strong>Bayesian gating ensemble</strong> weighted by regime-conditional out-of-sample reliability, on <strong>identical walk-forward folds</strong> with purged labels and modelled transaction costs — the quantum layer adding decorrelated, non-linear signal that lifts the ensemble <strong>beyond its classical-only configuration</strong>.</p></div>
+          <div class="pap"><div class="h">IBM Quantum hardware</div><p>Circuits run on <strong>PennyLane-Lightning</strong> and <strong>Qiskit</strong> at machine-precision parity, with validation and advantage runs on <strong>real IBM&nbsp;Quantum</strong> (Eagle / Heron) via Runtime primitives — full NISQ mitigation: <strong>ZNE, dynamical decoupling, Pauli twirling, SABRE</strong> transpilation.</p></div>
+          <div class="pap"><div class="h">Frontier</div><p>Migrating to <strong>error-corrected logical qubits</strong> on IBM's fault-tolerant roadmap, <strong>quantum amplitude estimation</strong> for Monte-Carlo CVaR (quadratic speed-up), and <strong>quantum-enhanced reinforcement learning</strong> for execution.</p></div>
+          <div class="pap"><div class="h">Operator-theoretic forecasting</div><p>Alongside, a <strong>GEDMD / Koopman-operator</strong> forecaster stabilized by multiscale Koopman-consistency, chaos diagnostics, a Monte-Carlo tail-risk veto and <strong>split-conformal</strong> intervals — fused into a Composite Stability Index, extended from FX to <strong>options vol surfaces</strong>.</p></div>
+        </div>
+      </div>
+      <div class="stack-tags">
+        <span class="tag">VQC</span><span class="tag">QAOA (XY-mixer / Dicke)</span><span class="tag">quantum-kernel OCSVM</span><span class="tag">quantum reservoir (Ising)</span><span class="tag">PennyLane-Lightning</span><span class="tag">Qiskit · IBM Quantum</span><span class="tag">ZNE · DD · Pauli twirling</span><span class="tag">Koopman / GEDMD</span><span class="tag">conformal prediction</span><span class="tag">FX · options · futures · crypto</span>
+      </div>
+      <div style="margin-top:14px;"><a class="dl" href="assets/writings/Quantum_ML_Multi_Asset.pdf" target="_blank" rel="noopener">Read the full write-up — Quantum ML for multi-asset signals (PDF) ↓</a></div>
+      </div></div></div>
+    </article>
+
+    <!-- CERN/PSI -->
+    <article class="case reveal" style="margin-bottom:0;">
+      <div class="case-top">
+        <h3>Detector calibration at CERN / PSI — CMS Phase-2 upgrade</h3>
+        <span class="role">data engineering &amp; experimental physics</span>
+      </div>
+      <p class="tagline">At PSI I characterized and calibrated next-generation RD53B / CROC pixel readout chips on prototype modules for the CMS Phase-2 Inner Tracker at the High-Luminosity LHC — the detector-grade rigor I now bring to AI, quant and data systems.</p>
+      <button class="expand-btn" aria-expanded="false"><span class="ar">+</span><span class="lbl-more">Read more</span><span class="lbl-less">Show less</span></button>
+      <div class="case-body"><div class="cb-inner"><div class="cb-pad">
+      <div class="proof" style="margin-bottom:22px;">
+        <span class="ic">🔗</span>
+        <p>Publicly listed by the Paul Scherrer Institute's High Energy Physics group:
+          <em>"Guillem Cucurull Llovera (Semester thesis, Physics, University of Zurich, July 2023): Calibration and Testing of Prototype Modules for the CMS Phase-2 Pixel detector upgrade."</em>
+          Supervised by Prof. Dr. Lea Caminada. &nbsp;
+          <a href="https://www.psi.ch/en/ltp-high-energy-physics/student-projects" target="_blank" rel="noopener">Verify on psi.ch ↗</a></p>
+      </div>
+      <div class="case-grid">
+        <div class="paps">
+          <div class="pap problem"><div class="h">The work</div><p>At PSI I characterized and calibrated next-generation <b>RD53B / CROC</b> pixel readout chips (65 nm CMOS) on prototype modules for the <b>CMS Phase-2 Inner Tracker</b> upgrade at the High-Luminosity LHC — bringing up the test hardware and running the full calibration chain on real detector modules.</p></div>
+          <div class="pap"><div class="h">Techniques</div><p>Operated the Ph2_ACF / CMSITminiDAQ + FC7-FPGA readout stack inside a temperature-controlled coldbox with an X-ray source; ran PixelAlive, noise, S-curve, gain (ToT), per-pixel threshold equalization and global threshold-adjustment scans, plus IV / voltage tuning via a custom probe card.</p></div>
+          <div class="pap"><div class="h">Results</div><p>Tuned per-pixel thresholds to ~2,000 e⁻ and equalized gain across chips; <b>reduced noisy / masked pixels from ~1,200–1,300 per chip to 0–2 per chip</b> after calibration, and identified the working on-module data-merging configuration (diagnosing defective chips and disconnected bump bonds).</p></div>
+          <div class="pap"><div class="h">Output</div><p>Documented the methodology in a supervised report and presented the calibration findings to the CMS group. This detector-grade rigor — reproducibility, monitoring, quantified results — is what I now bring to AI, quant and data systems.</p></div>
+        </div>
+        <div class="paps">
+          <div class="pap"><div class="h">How I got there</div><p>Continuous graduate research and coursework at the University of Zürich (2022–2024) built the toolkit the program demanded — C / C++ and Python for performance-critical data processing, parallel / HPC computing, numerical methods and reproducible scientific workflows. Within it, I spent ~7 months in 2023 on the PSI / CERN detector-calibration work itself, productive on the test bench from day one.</p></div>
+          <div class="pap"><div class="h">What it demanded (and proved)</div><p>Bring-up of a full data-acquisition chain (Ph2_ACF / CMSITminiDAQ on an FC7 FPGA), low-level chip configuration over registers and DACs, error-function fitting of threshold / noise S-curves, per-pixel trimming, and disciplined, reproducible measurement under real lab constraints — the same signal-from-noise rigor I now bring to ML, quant and trading systems.</p></div>
+          <div class="pap"><div class="h">Foundations</div><p>BSc Physics (minor in Mathematics), Boston University — top of class in Quantum Mechanics I &amp; II and a master's-level Advanced Electronics Laboratory under Prof. Lawrence R. Sulak, where the experimental-electronics skillset behind this detector work began.</p></div>
+        </div>
+      </div>
+      </div></div></div>
+    </article>
+  </div>
+</section>
+
+<!-- STACK -->
+<section id="stack">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="sec-num">03</span><h2 class="sec-title">Technical stack</h2></div>
+    <div class="matrix">
+      <div class="mcard reveal"><h4><span class="dot"></span>Machine Learning &amp; Statistics</h4><div class="chips">
+        <span class="chip">Supervised &amp; unsupervised learning</span><span class="chip">Statistical modelling</span><span class="chip">Hypothesis testing</span><span class="chip">Time-series analysis</span><span class="chip">Regression</span><span class="chip">Feature engineering</span><span class="chip">Signal extraction</span><span class="chip">Model evaluation</span><span class="chip">scikit-learn</span><span class="chip">LightGBM</span><span class="chip">pandas / NumPy / SciPy</span>
+      </div></div>
+      <div class="mcard reveal"><h4><span class="dot"></span>Quant &amp; Quantum Research</h4><div class="chips">
+        <span class="chip">Quantitative research</span><span class="chip">Backtesting / walk-forward</span><span class="chip">Portfolio &amp; risk modelling</span><span class="chip">Sharpe / drawdown / VaR</span><span class="chip">Koopman / EDMD operators</span><span class="chip">conformal prediction</span><span class="chip">Monte-Carlo tail risk</span><span class="chip">QuantConnect / LEAN</span><span class="chip">VQC · QAOA · quantum kernels</span><span class="chip">Qiskit</span><span class="chip">error mitigation (ZNE / DD)</span>
+      </div></div>
+      <div class="mcard reveal"><h4><span class="dot"></span>AI &amp; Agents</h4><div class="chips">
+        <span class="chip">Agentic AI</span><span class="chip">Multi-agent systems</span><span class="chip">LLM / multi-model orchestration</span><span class="chip">RAG / retrieval</span><span class="chip">Prompt engineering</span><span class="chip">Sovereign / self-hosted AI</span><span class="chip">Anti-hallucination gates</span>
+      </div></div>
+      <div class="mcard reveal"><h4><span class="dot"></span>Data Engineering</h4><div class="chips">
+        <span class="chip">Data pipelines</span><span class="chip">ETL</span><span class="chip">Batch &amp; streaming</span><span class="chip">Redis pub/sub</span><span class="chip">PostgreSQL</span><span class="chip">SQLite</span><span class="chip">Data quality &amp; validation</span><span class="chip">Large-scale / multi-TB data</span><span class="chip">Tableau · Power BI</span>
+      </div></div>
+      <div class="mcard reveal"><h4><span class="dot"></span>Programming &amp; Software</h4><div class="chips">
+        <span class="chip">Python</span><span class="chip">C / C++</span><span class="chip">SQL</span><span class="chip">R</span><span class="chip">TypeScript / JavaScript</span><span class="chip">FastAPI / Flask</span><span class="chip">React / Next.js</span><span class="chip">React Native</span><span class="chip">Node.js</span><span class="chip">System architecture</span>
+      </div></div>
+      <div class="mcard reveal"><h4><span class="dot"></span>Infrastructure &amp; Domain</h4><div class="chips">
+        <span class="chip">Linux</span><span class="chip">Docker</span><span class="chip">Self-hosting / mesh</span><span class="chip">Zero-downtime deploys</span><span class="chip">HPC / parallel computing</span><span class="chip">FinTech &amp; investor relations</span><span class="chip">Technical leadership</span>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="sec-num">04</span><h2 class="sec-title">Experience</h2></div>
+    <div class="timeline">
+      <div class="tl-item reveal">
+        <div class="when">May 2026 — Present · Remote (Zug, Switzerland)</div>
+        <h4>Head of Development</h4>
+        <div class="org">Asymmetrica Investments AG</div>
+        <p>Lead and architect the firm's entire in-house technology stack, from infrastructure to applications. Built an AI-driven investor-relations &amp; fundraising platform, architected the systematic AI hedge-fund engine, and own cloud infrastructure, data engineering, email deliverability and zero-downtime releases. Mentor and review junior engineers and interns.</p>
+      </div>
+      <div class="tl-item reveal">
+        <div class="when">Feb 2026 — May 2026 · Remote (Zug, Switzerland)</div>
+        <h4>Research Analyst</h4>
+        <div class="org">Asymmetrica Investments AG</div>
+        <p>Built full-stack research infrastructure and automated market-data ingestion with a backtesting harness, walk-forward validation and reproducible workflows; benchmarked quantum and quantum-inspired components against classical models. Transitioned into the Head of Development role.</p>
+      </div>
+      <div class="tl-item reveal">
+        <div class="when">Feb 2025 — May 2025 · London, UK</div>
+        <h4>Data Analyst</h4>
+        <div class="org">Victoria Solutions</div>
+        <p>Built Python and SQL workflows to extract, clean and aggregate operational datasets; developed automated validation checks; turned datasets into decision-ready reporting with Tableau and Power BI.</p>
+      </div>
+      <div class="tl-item reveal">
+        <div class="when">Mar 2023 — Oct 2023 · Villigen, Switzerland</div>
+        <h4>Data Engineering &amp; Detector Calibration — Research Assistant</h4>
+        <div class="org">Paul Scherrer Institute · CERN CMS Phase-2 Upgrade</div>
+        <p>Characterized and calibrated RD53B / CROC pixel readout-chip prototype modules for the CMS Phase-2 Inner Tracker; built Python and C++ data-processing pipelines with data-quality checks and reproducibility standards. Results presented to the CMS group; thesis listed publicly by PSI.</p>
+      </div>
+      <div class="tl-item reveal">
+        <div class="when">Sep 2022 — Jun 2024 · Zürich, Switzerland</div>
+        <h4>Graduate Teaching &amp; Research Assistant</h4>
+        <div class="org">University of Zürich</div>
+        <p>Continuous computational research in particle physics — simulation and data-processing tools in Python and C / C++ — alongside graduate courses in parallel computing, scientific computing and numerical methods, which led directly to my selection for the CMS Phase-2 Upgrade program at PSI.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="sec-num">05</span><h2 class="sec-title">Education</h2></div>
+    <div class="edu">
+      <div class="edu-card reveal"><div class="deg">MSc Financial Data Science</div><div class="sch">University of Surrey</div><div class="yr">2025 — 2026</div><span class="badge">Distinction</span><p style="color:var(--muted);font-size:13.5px;margin:12px 0 0;">Big Data Systems · Data Engineering · Machine Learning · Parallel &amp; Scientific Computing</p><p style="color:var(--muted);font-size:12.5px;margin:10px 0 0;line-height:1.55;"><b style="color:var(--text);font-weight:600;">Thesis</b> (Prof. Dorje Brody): a residual-driven stability framework wrapping a <b style="color:var(--text);font-weight:600;">GEDMD / Koopman-operator</b> FX forecaster in a multiscale Koopman-consistency score, chaos (Lyapunov / sample-entropy), Monte-Carlo tail-risk and <b style="color:var(--text);font-weight:600;">split-conformal</b> layers fused into a Composite Stability Index — cutting max drawdown from −12.9% to −1.4% at a higher Sharpe across a decade of FX data, now extended to <b style="color:var(--text);font-weight:600;">options implied-volatility surfaces</b> (SVI / SABR).</p></div>
+      <div class="edu-card reveal"><div class="deg">BSc Physics <span style="color:var(--dim);font-weight:400;">(Minor in Mathematics)</span></div><div class="sch">Boston University</div><div class="yr">2018 — 2022</div><p style="color:var(--muted);font-size:13.5px;margin:12px 0 0;">Top of class in <b style="color:var(--text);font-weight:600;">Quantum Mechanics I &amp; II</b>. Completed the master's-level <b style="color:var(--text);font-weight:600;">Advanced Electronics Laboratory</b> under Prof. Lawrence R. Sulak, and began my CS core through physics computing.</p></div>
+      <div class="edu-card reveal"><div class="deg">Graduate research &amp; coursework</div><div class="sch">University of Zürich</div><div class="yr">2022 — 2024</div><p style="color:var(--muted);font-size:13.5px;margin:12px 0 0;">Continuous computational-physics research alongside graduate courses in Scientific Computing, Numerical Modelling and Parallel Computing (C / C++) — the preparation that earned my place on the <b style="color:var(--text);font-weight:600;">CMS Phase-2 Upgrade</b> program at PSI / CERN.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-box reveal">
+      <h3>Let's build something</h3>
+      <p>Open to Data Scientist, ML / AI Engineer, Quant Researcher and Applied / Agentic AI roles — in-person in the USA, Switzerland &amp; UK (open to relocate).<br/>Most of my code lives in private repos, but I'm happy to share and walk through the architecture, code and results in an interview.</p>
+      <div class="cta" style="justify-content:center;">
+        <a class="btn primary" href="mailto:guillemllovera99@gmail.com">✉ guillemllovera99@gmail.com</a>
+        <a class="btn" href="https://www.linkedin.com/in/guillem-cucurull-llovera-6a52411b8/" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <a class="btn" href="assets/writings/CV_Guillem_Cucurull_Llovera.pdf" target="_blank" rel="noopener">CV (PDF) ↓</a>
+        <a class="btn" href="tel:+447444585008">+44 7444 585008</a>
+      </div>
+      <div class="langs"><span><b>Spanish</b> native</span><span><b>Catalan</b> native</span><span><b>English</b> fluent</span><span><b>French</b> conversational</span></div>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap">© <span id="yr"></span> Guillem Cucurull Llovera · London, UK · open to USA / Switzerland / UK</div></footer>
+
+<script>
+  document.getElementById('yr').textContent=new Date().getFullYear();
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:0.1});
+  document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(Math.min(i,6)*35)+'ms';io.observe(el);});
+
+  // seamless infinite logo marquee — clone the unit track until two identical
+  // halves each exceed the viewport, so translateX(-50%) never reveals a gap.
+  (function(){
+    const marquee=document.getElementById('marquee');
+    if(!marquee) return;
+    const unit=marquee.querySelector('.track').cloneNode(true);
+    unit.setAttribute('aria-hidden','true');
+    function build(){
+      marquee.innerHTML='';
+      marquee.appendChild(unit.cloneNode(true));
+      const w=marquee.firstElementChild.getBoundingClientRect().width;
+      if(!w) return;
+      const K=Math.max(2,Math.ceil((window.innerWidth+120)/w)); // copies per half
+      marquee.innerHTML='';
+      for(let i=0;i<2*K;i++) marquee.appendChild(unit.cloneNode(true));
+    }
+    let t; window.addEventListener('resize',()=>{clearTimeout(t);t=setTimeout(build,180);});
+    if(marquee.querySelector('img').complete) build();
+    else marquee.querySelector('img').addEventListener('load',build);
+    window.addEventListener('load',build);
+  })();
+
+  // collapsible "read more" on case blocks
+  document.querySelectorAll('.expand-btn').forEach(btn=>{
+    const body=btn.nextElementSibling;
+    btn.addEventListener('click',()=>{
+      const open=btn.getAttribute('aria-expanded')==='true';
+      btn.setAttribute('aria-expanded', open?'false':'true');
+      body.classList.toggle('open', !open);
+    });
+  });
+</script>
+</body>
+</html>
