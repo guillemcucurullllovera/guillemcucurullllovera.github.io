@@ -210,7 +210,7 @@
           with <strong>machine learning, statistical modelling, quantum &amp; quantitative research and multi-agent AI</strong> —
           and I own the full stack and data foundations behind them. I'm currently <strong>Head of Development (remote)
           at a Swiss investment firm</strong>, and I'm now looking to bring that end-to-end experience to an
-          <strong>in-person team in the USA, Switzerland or the UK</strong>.
+          <strong>in-person team in the USA or Switzerland</strong>.
         </p>
         <div class="cta reveal">
           <a class="btn primary" href="mailto:guillemllovera99@gmail.com">✉ Get in touch</a>
@@ -218,7 +218,7 @@
           <a class="btn" href="assets/writings/CV_Guillem_Cucurull_Llovera.pdf" target="_blank" rel="noopener">CV (PDF) ↓</a>
           <a class="btn" href="#research">Research ↓</a>
         </div>
-        <div class="open-to reveal">Based in <span class="loc">London, UK</span> · seeking in-person roles in the <span class="loc">USA · Switzerland · UK</span> (open to relocate)</div>
+        <div class="open-to reveal">Based in <span class="loc">London, UK</span> · seeking in-person roles in <span class="loc">USA · Switzerland</span> (open to relocate)</div>
         <div class="meta-row reveal">
           <span><b>work rights</b> EU Citizen (Spanish) · UK Right to Work (PSW visa)</span>
           <span><b>target roles</b> Data Scientist · ML / AI Engineer · Quant Researcher · Applied / Agentic AI</span>
@@ -332,32 +332,55 @@
       </div></div></div>
     </article>
 
-    <!-- C: AI hedge fund -->
+    <!-- B2: mastermail.ai -->
     <article class="case reveal">
       <div class="case-top">
-        <h3>Autonomous AI hedge-fund engine</h3>
-        <span class="role">architect — the firm's systematic hedge fund</span>
-        <span class="badges"><span class="bdg live">running live</span></span>
+        <h3>mastermail.ai — productized outreach SaaS</h3>
+        <span class="role">spin-out of the firm's outreach engine</span>
+        <span class="badges"><span class="bdg live">live</span></span>
       </div>
-      <p class="tagline">The systematic engine behind the firm's hedge fund: ~22 containerised services where specialist agents extract market signals, an ensemble fusion layer forms a directional view, an LLM generates and walk-forward-backtests strategies, and risk-gated orders execute across FX and equities — continuously, with a human approval gate.</p>
+      <p class="tagline">The sellable, white-label version of the outreach platform above — a GDPR-first B2B cold-email product positioned as a European alternative to Seamless.ai, sending from the customer's own mailbox with deliverability and compliance built in.</p>
       <button class="expand-btn" aria-expanded="false"><span class="ar">+</span><span class="lbl-more">Read more</span><span class="lbl-less">Show less</span></button>
       <div class="case-body"><div class="cb-inner"><div class="cb-pad">
       <div class="case-grid">
         <div class="paps">
-          <div class="pap problem"><div class="h">Problem</div><p>Discretionary research doesn't scale and is hard to audit. The mandate: a fully systematic, event-driven pipeline running 24/7 — from raw signals to risk-checked, backtested strategies and execution — that a small team can operate and trust.</p></div>
-          <div class="pap"><div class="h">Signals &amp; architecture</div><p>~22 Docker services over a <strong>Redis pub/sub backbone</strong>, persisting to PostgreSQL. Four specialist signal agents publish per asset: <strong>technical</strong> (RSI, MACD, EMA, Bollinger, ATR, VIX-regime), <strong>macro</strong> (central-bank rate differentials / carry + economic-calendar blackout gating), <strong>news / sentiment</strong>, and <strong>fundamental positioning</strong> (CFTC Commitment-of-Traders). Heartbeat health monitoring; FastAPI + React dashboard; Discord / Telegram control.</p></div>
-          <div class="pap"><div class="h">Signal fusion &amp; strategy</div><p>A fusion layer combines the signal families as a <strong>weighted ensemble</strong> (≈ technical 40% / macro 25% / fundamental 20% / news 15%) with an LLM arbitration step over conflicts, then a strategy agent backtests a library — momentum, mean-reversion, trend-following, breakout, stat-arb — on <strong>QuantConnect LEAN</strong> with <strong>walk-forward validation</strong>.</p></div>
+          <div class="pap problem"><div class="h">Positioning</div><p>Took the internal outreach engine and re-domained it as a standalone, multi-tenant product: <strong>mastermail.ai</strong>, deployed live on its own HTTPS domain with OAuth sign-in (Google &amp; Microsoft) and per-tenant branding — the same writer/reviewer anti-hallucination agent loop as the internal tool, now productized.</p></div>
+          <div class="pap"><div class="h">Data residency</div><p>Swappable LLM provider (self-hosted or EU-region endpoints) so customers can keep inference inside the EU — a deliberate compliance differentiator against US-based competitors.</p></div>
         </div>
         <div class="paps">
-          <div class="pap"><div class="h">Portfolio &amp; risk</div><p>Strategies are ranked by <strong>Sharpe</strong> and combined with <strong>risk-parity</strong> weighting; hard constraints gate execution — <strong>max drawdown 10%, leverage ≤ 3×, correlation ≤ 0.8, VaR / ES at 95%</strong> — with ATR-based position sizing and a portfolio circuit-breaker.</p></div>
-          <div class="pap"><div class="h">Regime-aware meta-agent</div><p>A four-part meta-agent scales gross exposure by a Monte-Carlo <strong>CVaR</strong> target: a 3-state regime <strong>HMM</strong> (100% NBER crisis precision), a One-Class-SVM anomaly alarm, a Bayesian strategy-weighting ensemble, and a bootstrap CVaR sizer. Out-of-sample it lifts Sharpe to <strong>0.895</strong> (above in-sample) and cuts drawdown ~41% — documented in a 949-line <strong>SR 11-7</strong> model-risk paper (see writings).</p></div>
-          <div class="pap"><div class="h">Execution &amp; scope</div><p>A position manager runs stop / take-profit / time exits every minute across <strong>OANDA</strong> (FX) and <strong>Alpaca</strong> (equities), human-approved before each order. Extending to crypto and <strong>options</strong> (SVI/SABR vol surface, py_vollib Greeks, delta/theta-limited structures); a quantum-ML research track plugs in as a weight-capped signal source.</p></div>
+          <div class="pap"><div class="h">Architecture</div><p>FastAPI backend, a Celery worker fleet (standard / premium / IO / scheduled) on Redis, Postgres, a cached-weights model service, and a Harvester component (see below) for discovery-driven prospecting — React/Vite frontend, multi-tenant with per-client brand/voice "playbooks."</p></div>
         </div>
       </div>
       <div class="stack-tags">
-        <span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">React</span><span class="tag">Redis pub/sub</span><span class="tag">PostgreSQL</span><span class="tag">Docker (~22 services)</span><span class="tag">QuantConnect / LEAN</span><span class="tag">walk-forward validation</span><span class="tag">risk-parity</span><span class="tag">Sharpe / drawdown / VaR</span><span class="tag">ATR sizing</span><span class="tag">CFTC COT</span><span class="tag">OANDA · Alpaca</span>
+        <span class="tag">FastAPI</span><span class="tag">Celery</span><span class="tag">Redis</span><span class="tag">PostgreSQL</span><span class="tag">React / Vite</span><span class="tag">OAuth (Google/Microsoft)</span><span class="tag">multi-tenant SaaS</span><span class="tag">EU data residency</span>
       </div>
-      <div style="margin-top:14px;"><a class="dl" href="assets/writings/AI_Hedge_Fund_Methodology.pdf" target="_blank" rel="noopener">Read the full methodology write-up (PDF) ↓</a></div>
+      </div></div></div>
+    </article>
+
+    <!-- C: systematic trading engine -->
+    <article class="case reveal">
+      <div class="case-top">
+        <h3>Heimdall — systematic convexity trading engine</h3>
+        <span class="role">architect — the firm's systematic strategy platform</span>
+        <span class="badges"><span class="bdg research">in development &amp; paper-trading</span></span>
+      </div>
+      <p class="tagline">A systematic options strategy platform built around a hard architectural split: a deterministic, auditable "money path" that governs capital allocation, and a firewalled LLM advisory layer that can inform but never execute — every live trade is entered by hand.</p>
+      <button class="expand-btn" aria-expanded="false"><span class="ar">+</span><span class="lbl-more">Read more</span><span class="lbl-less">Show less</span></button>
+      <div class="case-body"><div class="cb-inner"><div class="cb-pad">
+      <div class="case-grid">
+        <div class="paps">
+          <div class="pap problem"><div class="h">Strategy</div><p>A funded-convexity options book: short index put-spreads harvest carry, which finances deep out-of-the-money tail-hedge convexity, with a deterministic, credit-led regime gate reallocating capital between the two — deliberately model-free in the live money path, for auditability and safety.</p></div>
+          <div class="pap"><div class="h">Architecture</div><p>The design's core rule: no component ever emits an order — a broker connection exists for read-only position and Greek display at most, and the principal enters every live trade by hand. An LLM advisory layer sits entirely firewalled from the money path.</p></div>
+        </div>
+        <div class="paps">
+          <div class="pap"><div class="h">Risk governance</div><p>Nothing is promoted to live capital without clearing a formal graduation framework: deflated-Sharpe and drawdown-based kill thresholds, Kelly-calibrated position sizing, and walk-forward validation — paper-traded first, always.</p></div>
+          <div class="pap"><div class="h">Engineering scale</div><p>1,377 automated tests on the current build, dual operator/investor dashboards, self-hosted SSO across them, and a secret-scanning-enforced git deploy pipeline. A ~170-text research base in volatility and quant risk underpins the strategy design.</p></div>
+        </div>
+      </div>
+      <div class="stack-tags">
+        <span class="tag">Python</span><span class="tag">options / convexity strategies</span><span class="tag">deflated Sharpe</span><span class="tag">Kelly sizing</span><span class="tag">walk-forward validation</span><span class="tag">human-in-the-loop execution</span><span class="tag">self-hosted SSO</span><span class="tag">secret-scanning CI</span>
+      </div>
+      <div style="margin-top:14px;"><a class="dl" href="assets/writings/AI_Hedge_Fund_Methodology.pdf" target="_blank" rel="noopener">Read the methodology write-up (PDF) ↓</a></div>
       </div></div></div>
     </article>
 
@@ -379,13 +402,39 @@
       </div></div></div>
     </article>
 
+    <!-- Harvester + Digital Broker -->
+    <article class="case reveal">
+      <div class="case-top">
+        <h3>Harvester &amp; Digital Broker — data harvesting into a commodity trade desk</h3>
+        <span class="role">design + build</span>
+        <span class="badges"><span class="bdg live">live</span></span>
+      </div>
+      <p class="tagline">A discovery-driven, multi-source web-harvesting engine, and a commodity trade-desk product built on top of it — Asymmetrica acting as principal, sourcing EU buyers and Nigerian sellers and capturing the spread.</p>
+      <button class="expand-btn" aria-expanded="false"><span class="ar">+</span><span class="lbl-more">Read more</span><span class="lbl-less">Show less</span></button>
+      <div class="case-body"><div class="cb-inner"><div class="cb-pad">
+      <div class="case-grid">
+        <div class="paps">
+          <div class="pap problem"><div class="h">Harvester</div><p>A general-purpose scraping/normalization engine: discover → recon → extract → normalize → dedupe → export, deterministic-first with LLM assistance only for the long tail, and an explicit "never fabricate, honest-empty" design — it returns nothing rather than hallucinating a result. Auto-detects each source's structure and adapts extraction strategy. Powers five live workstreams: real estate, agricultural land, heavy equipment, farm inputs and commodities.</p></div>
+          <div class="pap"><div class="h">Digital Broker</div><p>A tenant-scoped trade-desk mode built on the Harvester: source-cited counterparty discovery, indicative pricing benchmarked against official UN Comtrade trade-flow data, live FX-normalized spread computation, buyer/seller matching, and a deal pipeline through contracting and trade-finance sourcing.</p></div>
+        </div>
+        <div class="paps">
+          <div class="pap"><div class="h">Compliance by design</div><p>KYC and sanctions screening, EU VAT (VIES) validation, and a dedicated approver/regulator role gating every deal stage — built in from the start given the regulatory weight of cross-border physical-commodity trading.</p></div>
+          <div class="pap"><div class="h">Status</div><p>Live as a platform capability — discovery, pricing and matching are operational for the first commodity vertical (sesame); contracting and trade-finance stages are in active build.</p></div>
+        </div>
+      </div>
+      <div class="stack-tags">
+        <span class="tag">multi-source scraping</span><span class="tag">deterministic-first extraction</span><span class="tag">UN Comtrade benchmarking</span><span class="tag">KYC / sanctions screening</span><span class="tag">trade finance</span><span class="tag">multi-tenant</span>
+      </div>
+      </div></div></div>
+    </article>
+
     <!-- F: smaller grid -->
     <article class="case reveal">
       <div class="case-top">
         <h3>More systems</h3>
         <span class="role">selected</span>
       </div>
-      <p class="tagline">A valuations engine and a PE-returns layer that consumes it, a macro-intelligence workflow, and a cross-border e-commerce architecture — the smaller systems around the core platform.</p>
+      <p class="tagline">A valuations engine and a PE-returns layer that consumes it, a public macro-research funnel, and a cross-border e-commerce architecture — the smaller systems around the core platform.</p>
       <button class="expand-btn" aria-expanded="false"><span class="ar">+</span><span class="lbl-more">Read more</span><span class="lbl-less">Show less</span></button>
       <div class="case-body"><div class="cb-inner"><div class="cb-pad">
       <div class="case-grid">
@@ -394,7 +443,7 @@
           <div class="pap"><div class="h">PE returns dashboard</div><p>A private-equity modelling layer that <strong>consumes the valuations output as inputs</strong> and runs the deal math: DCF / NPV over a projected free-cash-flow path with terminal value, EV / EBITDA exit-multiple valuation, annualized <strong>IRR</strong> and profitability index, plus 2-D sensitivity tables (exit-multiple × holding period, WACC × multiple) and bear / base / bull scenarios. <span style="color:var(--accent)">Shipped.</span></p></div>
         </div>
         <div class="paps">
-          <div class="pap"><div class="h">Macro-intelligence dashboard</div><p>An n8n + multi-agent workflow turning macro data and news into regime detection, signal summaries and strategy scenarios, with QuantConnect walk-forward backtests behind it. <span style="color:var(--accent)">Shipped.</span></p></div>
+          <div class="pap"><div class="h">Cycle Monitor — macro research dashboard</div><p>A public macro/regime research dashboard (credit, breadth, volatility panels) that doubles as the top of the capital-raising funnel, with free, paid and investor-perk tiers. <span style="color:var(--accent)">Shipped.</span></p></div>
           <div class="pap"><div class="h">Cross-border e-commerce platform</div><p>An 11-microservice architecture (gateway, catalog, payments, token ledger, compliance gating, logistics) with full audit trails. <span style="color:var(--warn)">Design / architecture stage.</span></p></div>
         </div>
       </div>
@@ -407,36 +456,34 @@
 <section id="research">
   <div class="wrap">
     <div class="sec-head reveal"><span class="sec-num">02</span><h2 class="sec-title">Research &amp; engineering</h2></div>
-    <p class="sec-intro reveal">A production quantum machine-learning layer across FX, options, futures and crypto; operator-theoretic forecasting (Koopman / conformal); and the CERN/PSI detector-calibration physics it all builds on.</p>
+    <p class="sec-intro reveal">A quantum-computing research track — one pipeline validated on real IBM Quantum hardware, plus simulated variational models — operator-theoretic forecasting (Koopman / conformal), and the CERN/PSI detector-calibration physics it all builds on.</p>
 
     <!-- current quantum / quant research -->
     <article class="case reveal">
       <div class="case-top">
-        <h3>Quantum &amp; quantitative research — live, vs classical</h3>
+        <h3>Quantum research for options pricing &amp; portfolio signals</h3>
         <span class="role">research &amp; engineering</span>
-        <span class="badges"><span class="bdg research">running live</span></span>
+        <span class="badges"><span class="bdg research">in development</span></span>
       </div>
-      <p class="tagline">A production quantum machine-learning layer inside the live trading engine — across <strong>FX, options, futures and crypto</strong> — where four quantum models run as an ensemble with, and benchmarked against, tuned classical baselines, on simulators and on real IBM&nbsp;Quantum hardware.</p>
+      <p class="tagline">A quantum-computing research track feeding the strategy platform above — one working, tested pipeline validated on real IBM Quantum hardware, plus a set of simulated variational models exploring classification, portfolio optimization, anomaly detection and signal processing.</p>
       <button class="expand-btn" aria-expanded="false"><span class="ar">+</span><span class="lbl-more">Read more</span><span class="lbl-less">Show less</span></button>
       <div class="case-body"><div class="cb-inner"><div class="cb-pad">
       <div class="case-grid">
         <div class="paps">
-          <div class="pap"><div class="h">VQC — directional classifier</div><p>A 14-qubit <strong>variational quantum classifier</strong> (data re-uploading, domain-aware entanglement, parameter-shift gradients) producing calibrated up/down probabilities per asset from a 14-feature vector.</p></div>
-          <div class="pap"><div class="h">QAOA — portfolio optimizer</div><p>Cardinality-constrained allocation as a QUBO solved with QAOA, using a constraint-preserving <strong>XY-mixer + Dicke-state</strong> initialization that stays inside the feasible K-hot manifold.</p></div>
-          <div class="pap"><div class="h">Quantum-kernel anomaly (qrbf-OCSVM)</div><p>A one-class SVM whose RBF kernel is replaced by a <strong>fidelity quantum kernel</strong> — market-state similarity computed in a Hilbert space no classical kernel reaches — for distribution-free regime / crisis alarms.</p></div>
-          <div class="pap"><div class="h">Quantum Reservoir Computing</div><p>A <strong>transverse-field Ising</strong> reservoir as a fixed quantum feature extractor with a light classical readout — quantum temporal richness with no barren-plateau risk.</p></div>
+          <div class="pap"><div class="h">QAE — options pricing</div><p>A qiskit-native <strong>quantum amplitude estimation</strong> pipeline (maximum-likelihood AE) for options pricing, with measurement-error mitigation — the one component validated on real IBM Quantum hardware via the public access program, and fully covered by its test suite.</p></div>
+          <div class="pap"><div class="h">VQC — directional classifier</div><p>A <strong>variational quantum classifier</strong> producing calibrated up/down probabilities per asset from a market-feature vector — simulated, in research.</p></div>
+          <div class="pap"><div class="h">QAOA — portfolio optimizer</div><p>Cardinality-constrained portfolio allocation as a QUBO, explored with <strong>QAOA</strong> — simulated, in research.</p></div>
         </div>
         <div class="paps">
-          <div class="pap"><div class="h">Ensemble &amp; validation</div><p>The quantum models combine with classical signals in a <strong>Bayesian gating ensemble</strong> weighted by regime-conditional out-of-sample reliability, on <strong>identical walk-forward folds</strong> with purged labels and modelled transaction costs — the quantum layer adding decorrelated, non-linear signal that lifts the ensemble <strong>beyond its classical-only configuration</strong>.</p></div>
-          <div class="pap"><div class="h">IBM Quantum hardware</div><p>Circuits run on <strong>PennyLane-Lightning</strong> and <strong>Qiskit</strong> at machine-precision parity, with validation and advantage runs on <strong>real IBM&nbsp;Quantum</strong> (Eagle / Heron) via Runtime primitives — full NISQ mitigation: <strong>ZNE, dynamical decoupling, Pauli twirling, SABRE</strong> transpilation.</p></div>
-          <div class="pap"><div class="h">Frontier</div><p>Migrating to <strong>error-corrected logical qubits</strong> on IBM's fault-tolerant roadmap, <strong>quantum amplitude estimation</strong> for Monte-Carlo CVaR (quadratic speed-up), and <strong>quantum-enhanced reinforcement learning</strong> for execution.</p></div>
-          <div class="pap"><div class="h">Operator-theoretic forecasting</div><p>Alongside, a <strong>GEDMD / Koopman-operator</strong> forecaster stabilized by multiscale Koopman-consistency, chaos diagnostics, a Monte-Carlo tail-risk veto and <strong>split-conformal</strong> intervals — fused into a Composite Stability Index, extended from FX to <strong>options vol surfaces</strong>.</p></div>
+          <div class="pap"><div class="h">Quantum-kernel &amp; reservoir methods</div><p>A projected <strong>quantum kernel</strong> for regime / anomaly detection, and a <strong>quantum reservoir computing</strong> model for signal processing — both simulated research components benchmarked against classical baselines.</p></div>
+          <div class="pap"><div class="h">IBM Startup Program</div><p>In discussions to join the <strong>IBM Startup Program</strong>, with an early-stage spin-off under exploration.</p></div>
+          <div class="pap"><div class="h">Operator-theoretic forecasting</div><p>Alongside the quantum track, a <strong>Koopman-operator</strong> forecaster with split-conformal prediction intervals, extended from FX toward options vol surfaces.</p></div>
         </div>
       </div>
       <div class="stack-tags">
-        <span class="tag">VQC</span><span class="tag">QAOA (XY-mixer / Dicke)</span><span class="tag">quantum-kernel OCSVM</span><span class="tag">quantum reservoir (Ising)</span><span class="tag">PennyLane-Lightning</span><span class="tag">Qiskit · IBM Quantum</span><span class="tag">ZNE · DD · Pauli twirling</span><span class="tag">Koopman / GEDMD</span><span class="tag">conformal prediction</span><span class="tag">FX · options · futures · crypto</span>
+        <span class="tag">Qiskit</span><span class="tag">quantum amplitude estimation</span><span class="tag">IBM Quantum hardware</span><span class="tag">VQC</span><span class="tag">QAOA</span><span class="tag">quantum kernel methods</span><span class="tag">quantum reservoir computing</span><span class="tag">Koopman / GEDMD</span><span class="tag">conformal prediction</span>
       </div>
-      <div style="margin-top:14px;"><a class="dl" href="assets/writings/Quantum_ML_Multi_Asset.pdf" target="_blank" rel="noopener">Read the full write-up — Quantum ML for multi-asset signals (PDF) ↓</a></div>
+      <div style="margin-top:14px;"><a class="dl" href="assets/writings/Quantum_ML_Multi_Asset.pdf" target="_blank" rel="noopener">Read the write-up — quantum research for multi-asset signals (PDF) ↓</a></div>
       </div></div></div>
     </article>
 
@@ -483,7 +530,7 @@
         <span class="chip">Supervised &amp; unsupervised learning</span><span class="chip">Statistical modelling</span><span class="chip">Hypothesis testing</span><span class="chip">Time-series analysis</span><span class="chip">Regression</span><span class="chip">Feature engineering</span><span class="chip">Signal extraction</span><span class="chip">Model evaluation</span><span class="chip">scikit-learn</span><span class="chip">LightGBM</span><span class="chip">pandas / NumPy / SciPy</span>
       </div></div>
       <div class="mcard reveal"><h4><span class="dot"></span>Quant &amp; Quantum Research</h4><div class="chips">
-        <span class="chip">Quantitative research</span><span class="chip">Backtesting / walk-forward</span><span class="chip">Portfolio &amp; risk modelling</span><span class="chip">Sharpe / drawdown / VaR</span><span class="chip">Koopman / EDMD operators</span><span class="chip">conformal prediction</span><span class="chip">Monte-Carlo tail risk</span><span class="chip">QuantConnect / LEAN</span><span class="chip">VQC · QAOA · quantum kernels</span><span class="chip">Qiskit</span><span class="chip">error mitigation (ZNE / DD)</span>
+        <span class="chip">Quantitative research</span><span class="chip">Backtesting / walk-forward</span><span class="chip">Portfolio &amp; risk modelling</span><span class="chip">Sharpe / drawdown / VaR</span><span class="chip">Koopman / EDMD operators</span><span class="chip">conformal prediction</span><span class="chip">Monte-Carlo tail risk</span><span class="chip">QuantConnect / LEAN</span><span class="chip">VQC · QAOA · quantum kernels</span><span class="chip">Qiskit</span><span class="chip">quantum amplitude estimation</span>
       </div></div>
       <div class="mcard reveal"><h4><span class="dot"></span>AI &amp; Agents</h4><div class="chips">
         <span class="chip">Agentic AI</span><span class="chip">Multi-agent systems</span><span class="chip">LLM / multi-model orchestration</span><span class="chip">RAG / retrieval</span><span class="chip">Prompt engineering</span><span class="chip">Sovereign / self-hosted AI</span><span class="chip">Anti-hallucination gates</span>
@@ -557,7 +604,7 @@
   <div class="wrap">
     <div class="contact-box reveal">
       <h3>Let's build something</h3>
-      <p>Open to Data Scientist, ML / AI Engineer, Quant Researcher and Applied / Agentic AI roles — in-person in the USA, Switzerland &amp; UK (open to relocate).<br/>Most of my code lives in private repos, but I'm happy to share and walk through the architecture, code and results in an interview.</p>
+      <p>Open to Data Scientist, ML / AI Engineer, Quant Researcher and Applied / Agentic AI roles — in-person in the USA &amp; Switzerland (open to relocate).<br/>Most of my code lives in private repos, but I'm happy to share and walk through the architecture, code and results in an interview.</p>
       <div class="cta" style="justify-content:center;">
         <a class="btn primary" href="mailto:guillemllovera99@gmail.com">✉ guillemllovera99@gmail.com</a>
         <a class="btn" href="https://www.linkedin.com/in/guillem-cucurull-llovera-6a52411b8/" target="_blank" rel="noopener">LinkedIn ↗</a>
@@ -569,7 +616,7 @@
   </div>
 </section>
 
-<footer><div class="wrap">© <span id="yr"></span> Guillem Cucurull Llovera · London, UK · open to USA / Switzerland / UK</div></footer>
+<footer><div class="wrap">© <span id="yr"></span> Guillem Cucurull Llovera · London, UK · open to USA / Switzerland</div></footer>
 
 <script>
   document.getElementById('yr').textContent=new Date().getFullYear();
