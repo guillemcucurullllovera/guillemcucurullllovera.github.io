@@ -305,6 +305,32 @@
       </div></div></div>
     </article>
 
+    <!-- C: systematic trading engine (moved up — quant flagship) -->
+    <article class="case reveal">
+      <div class="case-top">
+        <h3>Heimdall — systematic convexity trading engine</h3>
+        <span class="role">architect — the firm's systematic strategy platform</span>
+        <span class="badges"><span class="bdg research">in development &amp; paper-trading</span></span>
+      </div>
+      <p class="tagline">A systematic options strategy platform built around a hard architectural split: a deterministic, auditable "money path" that governs capital allocation, and a firewalled LLM advisory layer that can inform but never execute — every live trade is entered by hand.</p>
+      <button class="expand-btn" aria-expanded="false"><span class="ar">+</span><span class="lbl-more">Read more</span><span class="lbl-less">Show less</span></button>
+      <div class="case-body"><div class="cb-inner"><div class="cb-pad">
+      <div class="case-grid">
+        <div class="paps">
+          <div class="pap problem"><div class="h">Strategy</div><p>A funded-convexity options book: short index put-spreads harvest carry, which finances deep out-of-the-money tail-hedge convexity, with a deterministic, credit-led regime gate reallocating capital between the two — deliberately model-free in the live money path, for auditability and safety.</p></div>
+          <div class="pap"><div class="h">Architecture</div><p>The design's core rule: no component ever emits an order — a broker connection exists for read-only position and Greek display at most, and the principal enters every live trade by hand. An LLM advisory layer sits entirely firewalled from the money path.</p></div>
+        </div>
+        <div class="paps">
+          <div class="pap"><div class="h">Risk governance</div><p>Nothing is promoted to live capital without clearing a formal graduation framework: deflated-Sharpe and drawdown-based kill thresholds, Kelly-calibrated position sizing, and walk-forward validation — paper-traded first, always.</p></div>
+          <div class="pap"><div class="h">Engineering scale</div><p>1,377 automated tests on the current build, dual operator/investor dashboards, self-hosted SSO across them, and a secret-scanning-enforced git deploy pipeline. A ~170-text research base in volatility and quant risk underpins the strategy design.</p></div>
+        </div>
+      </div>
+      <div class="stack-tags">
+        <span class="tag">Python</span><span class="tag">options / convexity strategies</span><span class="tag">deflated Sharpe</span><span class="tag">Kelly sizing</span><span class="tag">walk-forward validation</span><span class="tag">human-in-the-loop execution</span><span class="tag">self-hosted SSO</span><span class="tag">secret-scanning CI</span>
+      </div>
+      </div></div></div>
+    </article>
+
     <!-- B: outreach + SDR + CRM -->
     <article class="case reveal">
       <div class="case-top">
@@ -339,48 +365,22 @@
         <span class="role">spin-out of the firm's outreach engine</span>
         <span class="badges"><span class="bdg live">live</span></span>
       </div>
-      <p class="tagline">The sellable, white-label version of the outreach platform above — a GDPR-first B2B cold-email product positioned as a European alternative to Seamless.ai, sending from the customer's own mailbox with deliverability and compliance built in.</p>
+      <p class="tagline">The outreach engine productized into a standalone, white-label SaaS — and <strong>already live in production, integrated into two external client platforms (Kaseware and OSINT)</strong>. A GDPR-first B2B alternative to Seamless.ai that sends from the customer's own mailbox with deliverability and compliance built in.</p>
       <button class="expand-btn" aria-expanded="false"><span class="ar">+</span><span class="lbl-more">Read more</span><span class="lbl-less">Show less</span></button>
       <div class="case-body"><div class="cb-inner"><div class="cb-pad">
       <div class="case-grid">
         <div class="paps">
-          <div class="pap problem"><div class="h">Positioning</div><p>Took the internal outreach engine and re-domained it as a standalone, multi-tenant product: <strong>mastermail.ai</strong>, deployed live on its own HTTPS domain with OAuth sign-in (Google &amp; Microsoft) and per-tenant branding — the same writer/reviewer anti-hallucination agent loop as the internal tool, now productized.</p></div>
-          <div class="pap"><div class="h">Data residency</div><p>Swappable LLM provider (self-hosted or EU-region endpoints) so customers can keep inference inside the EU — a deliberate compliance differentiator against US-based competitors.</p></div>
+          <div class="pap problem"><div class="h">Clients in production</div><p>Live and <strong>integrated into two external platforms — Kaseware and OSINT</strong> — running mastermail.ai's outreach inside their own products. Real B2B deployments, not a pilot: the productized engine earning its keep through live client integrations.</p></div>
+          <div class="pap"><div class="h">Positioning</div><p>The internal outreach engine re-domained as a standalone, multi-tenant product on its own HTTPS domain with OAuth sign-in (Google &amp; Microsoft) and per-tenant branding — the same writer/reviewer anti-hallucination agent loop, now productized and white-labelled.</p></div>
         </div>
         <div class="paps">
+          <div class="pap"><div class="h">Data residency</div><p>Swappable LLM provider (self-hosted or EU-region endpoints) so customers can keep inference inside the EU — a deliberate compliance differentiator against US-based competitors like Seamless.ai.</p></div>
           <div class="pap"><div class="h">Architecture</div><p>FastAPI backend, a Celery worker fleet (standard / premium / IO / scheduled) on Redis, Postgres, a cached-weights model service, and a Harvester component (see below) for discovery-driven prospecting — React/Vite frontend, multi-tenant with per-client brand/voice "playbooks."</p></div>
         </div>
       </div>
       <div class="stack-tags">
         <span class="tag">FastAPI</span><span class="tag">Celery</span><span class="tag">Redis</span><span class="tag">PostgreSQL</span><span class="tag">React / Vite</span><span class="tag">OAuth (Google/Microsoft)</span><span class="tag">multi-tenant SaaS</span><span class="tag">EU data residency</span>
       </div>
-      </div></div></div>
-    </article>
-
-    <!-- C: systematic trading engine -->
-    <article class="case reveal">
-      <div class="case-top">
-        <h3>Heimdall — systematic convexity trading engine</h3>
-        <span class="role">architect — the firm's systematic strategy platform</span>
-        <span class="badges"><span class="bdg research">in development &amp; paper-trading</span></span>
-      </div>
-      <p class="tagline">A systematic options strategy platform built around a hard architectural split: a deterministic, auditable "money path" that governs capital allocation, and a firewalled LLM advisory layer that can inform but never execute — every live trade is entered by hand.</p>
-      <button class="expand-btn" aria-expanded="false"><span class="ar">+</span><span class="lbl-more">Read more</span><span class="lbl-less">Show less</span></button>
-      <div class="case-body"><div class="cb-inner"><div class="cb-pad">
-      <div class="case-grid">
-        <div class="paps">
-          <div class="pap problem"><div class="h">Strategy</div><p>A funded-convexity options book: short index put-spreads harvest carry, which finances deep out-of-the-money tail-hedge convexity, with a deterministic, credit-led regime gate reallocating capital between the two — deliberately model-free in the live money path, for auditability and safety.</p></div>
-          <div class="pap"><div class="h">Architecture</div><p>The design's core rule: no component ever emits an order — a broker connection exists for read-only position and Greek display at most, and the principal enters every live trade by hand. An LLM advisory layer sits entirely firewalled from the money path.</p></div>
-        </div>
-        <div class="paps">
-          <div class="pap"><div class="h">Risk governance</div><p>Nothing is promoted to live capital without clearing a formal graduation framework: deflated-Sharpe and drawdown-based kill thresholds, Kelly-calibrated position sizing, and walk-forward validation — paper-traded first, always.</p></div>
-          <div class="pap"><div class="h">Engineering scale</div><p>1,377 automated tests on the current build, dual operator/investor dashboards, self-hosted SSO across them, and a secret-scanning-enforced git deploy pipeline. A ~170-text research base in volatility and quant risk underpins the strategy design.</p></div>
-        </div>
-      </div>
-      <div class="stack-tags">
-        <span class="tag">Python</span><span class="tag">options / convexity strategies</span><span class="tag">deflated Sharpe</span><span class="tag">Kelly sizing</span><span class="tag">walk-forward validation</span><span class="tag">human-in-the-loop execution</span><span class="tag">self-hosted SSO</span><span class="tag">secret-scanning CI</span>
-      </div>
-      <div style="margin-top:14px;"><a class="dl" href="assets/writings/AI_Hedge_Fund_Methodology.pdf" target="_blank" rel="noopener">Read the methodology write-up (PDF) ↓</a></div>
       </div></div></div>
     </article>
 
@@ -483,7 +483,6 @@
       <div class="stack-tags">
         <span class="tag">Qiskit</span><span class="tag">quantum amplitude estimation</span><span class="tag">IBM Quantum hardware</span><span class="tag">VQC</span><span class="tag">QAOA</span><span class="tag">quantum kernel methods</span><span class="tag">quantum reservoir computing</span><span class="tag">Koopman / GEDMD</span><span class="tag">conformal prediction</span>
       </div>
-      <div style="margin-top:14px;"><a class="dl" href="assets/writings/Quantum_ML_Multi_Asset.pdf" target="_blank" rel="noopener">Read the write-up — quantum research for multi-asset signals (PDF) ↓</a></div>
       </div></div></div>
     </article>
 
